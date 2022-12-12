@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+<!--    인터넷을 연다 이유는 API 호출 을 위해-->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -29,6 +31,7 @@
         <activity android:name=".PopupActivity" android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".LogPopupActivity" android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".test"/>
+        <activity android:name=".apitest"/>
 
     </application>
 

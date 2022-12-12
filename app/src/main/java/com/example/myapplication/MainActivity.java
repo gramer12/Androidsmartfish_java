@@ -225,7 +225,8 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     //버튼
     public void mOnLogPopupClick(View v){
         //데이터 담아서 팝업(액티비티) 호출
-        Intent intent = new Intent(this, LogPopupActivity.class);
+//        Intent intent = new Intent(this, LogPopupActivity.class);
+        Intent intent = new Intent(this, apitest.class);
         intent.putExtra("data", "Test Popup");
         startActivityForResult(intent, 1);
     }

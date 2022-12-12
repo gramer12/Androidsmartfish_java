@@ -16,7 +16,7 @@ public class UserInfo1 {
         this.temper = temper;
         this.ph = ph;
         this.light = light;
-        Fishbowl = fishbowl;
+        this.Fishbowl = fishbowl;
     }
 
     public String getDate() {
