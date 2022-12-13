@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -8,21 +9,28 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PopupActivity extends Activity {
 android.widget.ImageView ImageView;
 
-    //리싸이클러뷰
-    RecyclerView userList;
-    LinearLayoutManager linearLayoutManager;
-    UserListAdapter adapter;
-    ArrayList<UserInfo> items = new ArrayList<>();
 
+// 어답터
+private UserListAdapter adapter;
+    // 리사이클러뷰
+    private RecyclerView recyclerView;
+    // 진행바
+    ProgressDialog progressDoalog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,84 +40,50 @@ android.widget.ImageView ImageView;
         setContentView(R.layout.popup_activity);
 
         //UI 객체생성
-//        txtText = (TextView)findViewById(R.id.txtText);
+        TextView txtText = (TextView)findViewById(R.id.notice);
+
 
         //데이터 가져오기
         Intent intent = getIntent();
-        String data = intent.getStringExtra("data");
-//        txtText.setText(data);
+        String data = intent.getStringExtra("name");
+        txtText.setText(data +" DATA");
 
 
 //리사이클러뷰
-        userList = findViewById(R.id.popupRecyclerview);
-        linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        adapter = new UserListAdapter(items);
-        userList.setLayoutManager(linearLayoutManager);
-        userList.setAdapter(adapter);
+//        userList = findViewById(R.id.popupRecyclerview);
+//        linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+//        adapter = new UserListAdapter(items);
+//        userList.setLayoutManager(linearLayoutManager);
+//        userList.setAdapter(adapter);
 
-        {
-            items.add(new UserInfo(
-                    "이순신",
-                    "13",
-                    getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                    "충무공이 될 사람"
-            ));
 
-            items.add(new UserInfo(
-                    "고이즈미",
-                    "11",
-                    getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                    "그것이 안드로이드이니까.."
-            ));
-            items.add(new UserInfo(
-                    "고이즈미",
-                    "11",
-                    getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                    "그것이 안드로이드이니까.."
-            ));
-            items.add(new UserInfo(
-                    "고이즈미",
-                    "11",
-                    getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                    "그것이 안드로이드이니까.."
-            ));
-            items.add(new UserInfo(
-                    "고이즈미",
-                    "11",
-                    getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                    "그것이 안드로이드이니까.."
-            ));items.add(new UserInfo(
-                "고이즈미",
-                "11",
-                getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                "그것이 안드로이드이니까.."
-        ));items.add(new UserInfo(
-                "고이즈미",
-                "11",
-                getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                "그것이 안드로이드이니까.."
-        ));items.add(new UserInfo(
-                "고이즈미",
-                "11",
-                getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                "그것이 안드로이드이니까.."
-        ));items.add(new UserInfo(
-                "고이즈미",
-                "11",
-                getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                "그것이 안드로이드이니까.."
-        ));items.add(new UserInfo(
-                "고이즈미",
-                "11",
-                getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                "그것이 안드로이드이니까.."
-        ));items.add(new UserInfo(
-                "고이즈미",
-                "11",
-                getResources().getDrawable(R.drawable.ic_launcher_foreground),
-                "그것이 안드로이드이니까.."
-        ));
-        }
+        progressDoalog = new ProgressDialog(PopupActivity.this);
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.show();
+
+
+
+// 레트로핏 인스턴스 생성을 해줍니다.
+        // enqueue로 비동기 통신을 싱행합니다.
+        Retrofit_interface service = retrofit_client.getRetrofitInstance().create(Retrofit_interface.class);
+        Call<List<UserInfo>> call = service.getSensorData(data);
+        //통신완료후 이벤트 처리를 위한 콜백 리스너 등록
+        call.enqueue(new Callback<List<UserInfo>>() {
+            // 정상으로 통신 성공시
+            @Override
+            public void onResponse(Call<List<UserInfo>> call, Response<List<UserInfo>> response) {
+                progressDoalog.dismiss();
+                generateDataList(response.body());
+            }
+            // 통신 실패시(예외발생, 인터넷끊김 등의 이유)
+            @Override
+            public void onFailure(Call<List<UserInfo>> call, Throwable t) {
+                progressDoalog.dismiss();
+                System.out.println(t);
+                Toast.makeText(PopupActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 
@@ -122,6 +96,14 @@ android.widget.ImageView ImageView;
 
         //액티비티(팝업) 닫기
         finish();
+    }
+    // 리사이클러뷰
+    private void generateDataList(List<UserInfo> photoList) {
+        recyclerView = findViewById(R.id.popupRecyclerview);
+        adapter = new UserListAdapter(this, photoList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PopupActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

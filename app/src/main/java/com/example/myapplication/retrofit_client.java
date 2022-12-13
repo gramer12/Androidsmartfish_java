@@ -8,9 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class retrofit_client {
 
-//    private static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
-private static final String BASE_URL = "http://61.103.243.190:3000/";
-
+    //    private static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
+//private static final String BASE_URL = "http://61.103.243.190:3000/";
+    private static final String BASE_URL = "http://192.168.1.106:3000/";
 
 
     private static Retrofit retrofit;
@@ -28,11 +28,12 @@ private static final String BASE_URL = "http://61.103.243.190:3000/";
     }
 
 
+    public static Retrofit_interface getApiService() {
+        return getInstance().create(Retrofit_interface.class);
+    }
 
-    public static Retrofit_interface getApiService(){return getInstance().create(Retrofit_interface.class);}
 
-
-    private static Retrofit getInstance(){
+    private static Retrofit getInstance() {
         Gson gson = new GsonBuilder().setLenient().create();
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)

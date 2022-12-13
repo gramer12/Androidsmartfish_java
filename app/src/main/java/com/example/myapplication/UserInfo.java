@@ -2,49 +2,49 @@ package com.example.myapplication;
 
 import android.graphics.drawable.Drawable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserInfo {
-    private String name;
-    private String age;
-    private Drawable profile;
-    private String about;
+    @SerializedName("date")
+    private String date;
+    @SerializedName("time")
+    private String time;
+    @SerializedName("data")
+    private String data;
 
-    public UserInfo(){}
-    public UserInfo(String name, String age, Drawable profile, String about) {
-        this.name = name;
-        this.age = age;
-        this.profile = profile;
-        this.about = about;
+//    @SerializedName("sensorName")
+//    private String sensorName;
+
+    public UserInfo(String date, String time, String data) {
+        this.date = date;
+        this.time = time;
+        this.data = data;
     }
 
-    public String getName() {
-        return name;
+    public String getDate() {
+        return date;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getAge() {
-        return age;
+    public String getTime() {
+        return time;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public Drawable getProfile() {
-        return profile;
+    public String getData() {
+        return data;
     }
 
-    public void setProfile(Drawable profile) {
-        this.profile = profile;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public String getAbout() {
-        return about;
-    }
 
-    public void setAbout(String about) {
-        this.about = about;
-    }
+
 }
