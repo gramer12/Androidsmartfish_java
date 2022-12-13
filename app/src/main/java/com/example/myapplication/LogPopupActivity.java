@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONObject;
+
+import java.text.BreakIterator;
 import java.util.ArrayList;
 
 public class LogPopupActivity extends Activity {
@@ -34,8 +38,9 @@ android.widget.ImageView ImageView;
 
         //데이터 가져오기
         Intent intent = getIntent();
-        String data = intent.getStringExtra("data");
-//        txtText.setText(data);
+        String data = intent.getStringExtra("name");
+        TextView txtText =(TextView)findViewById(R.id.Textview_LOG);
+        txtText.setText(data+" LOG DATA");
 
 
 //리사이클러뷰

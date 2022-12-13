@@ -2,12 +2,20 @@ package com.example.myapplication;
 
 import android.graphics.drawable.Drawable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserInfo1 {
+    @SerializedName("date")
     private String date;
+    @SerializedName("time")
     private String time;
+    @SerializedName("temper")
     private String temper;
+    @SerializedName("ph")
     private String ph;
+    @SerializedName("light")
     private String light;
+    @SerializedName("Fishbowl")
     private String Fishbowl;
 
     public UserInfo1(String date, String time, String temper, String ph, String light, String fishbowl) {
