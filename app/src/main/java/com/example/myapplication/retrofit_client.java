@@ -9,8 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class retrofit_client {
 
     //    private static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
-//private static final String BASE_URL = "http://61.103.243.190:3000/";
-    private static final String BASE_URL = "http://192.168.1.106:3000/";
+private static final String BASE_URL = "http://61.103.243.190:8080/";
+//    private static final String BASE_URL = "http://61.103.243.190:3000/";
+//    private static final String BASE_URL = "http://192.168.1.106:3000/";
 
 
     private static Retrofit retrofit;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -99,11 +100,16 @@ private UserListAdapter adapter;
     }
     // 리사이클러뷰
     private void generateDataList(List<UserInfo> photoList) {
-        recyclerView = findViewById(R.id.popupRecyclerview);
-        adapter = new UserListAdapter(this, photoList);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PopupActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        try {
+            recyclerView = findViewById(R.id.popupRecyclerview);
+            adapter = new UserListAdapter(this, photoList);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PopupActivity.this);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
+        }catch (Exception e){
+            Log.i("gello", " "+e);
+        }
+
     }
 
     @Override

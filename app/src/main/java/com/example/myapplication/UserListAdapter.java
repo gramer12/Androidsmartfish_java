@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,13 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.Holder
     }
     @Override
     public int getItemCount() {
-        return dataList.size();
+        try {
+            return dataList.size();
+        }catch (Exception e){
+            Log.e("gello",""+e);
+            return 0;
+        }
+
     }
 
     public class Holder extends RecyclerView.ViewHolder {
