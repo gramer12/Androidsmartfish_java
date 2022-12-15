@@ -26,13 +26,13 @@ public class PopupActivity extends Activity {
 android.widget.ImageView ImageView;
 
 
-// 어답터
-private UserListAdapter adapter;
+    // 어답터
+    private UserListAdapter adapter;
     // 리사이클러뷰
     private RecyclerView recyclerView;
+    String sensorName;
     // 진행바
     ProgressDialog progressDoalog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +46,8 @@ private UserListAdapter adapter;
 
         //데이터 가져오기
         Intent intent = getIntent();
-        String data = intent.getStringExtra("name");
-        txtText.setText(data +" DATA");
+        sensorName = intent.getStringExtra("name");
+        txtText.setText(sensorName +" DATA");
 
 
 //리사이클러뷰
@@ -58,33 +58,10 @@ private UserListAdapter adapter;
 //        userList.setAdapter(adapter);
 
 
-        progressDoalog = new ProgressDialog(PopupActivity.this);
-        progressDoalog.setMessage("Loading....");
-        progressDoalog.show();
+
+        generateDataList(MainActivity.getAlldataList());
 
 
-
-// 레트로핏 인스턴스 생성을 해줍니다.
-        // enqueue로 비동기 통신을 싱행합니다.
-        Retrofit_interface service = retrofit_client.getRetrofitInstance().create(Retrofit_interface.class);
-        Call<List<UserInfo>> call = service.getSensorData(data);
-        //통신완료후 이벤트 처리를 위한 콜백 리스너 등록
-        call.enqueue(new Callback<List<UserInfo>>() {
-            // 정상으로 통신 성공시
-            @Override
-            public void onResponse(Call<List<UserInfo>> call, Response<List<UserInfo>> response) {
-                progressDoalog.dismiss();
-                generateDataList(response.body());
-            }
-            // 통신 실패시(예외발생, 인터넷끊김 등의 이유)
-            @Override
-            public void onFailure(Call<List<UserInfo>> call, Throwable t) {
-                progressDoalog.dismiss();
-                System.out.println(t);
-                Toast.makeText(PopupActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
     }
 
@@ -99,10 +76,10 @@ private UserListAdapter adapter;
         finish();
     }
     // 리사이클러뷰
-    private void generateDataList(List<UserInfo> photoList) {
+    private void generateDataList(List<UserInfo1> photoList) {
         try {
             recyclerView = findViewById(R.id.popupRecyclerview);
-            adapter = new UserListAdapter(this, photoList);
+            adapter = new UserListAdapter(this, photoList,sensorName);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PopupActivity.this);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);

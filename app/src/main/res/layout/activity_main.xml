@@ -90,97 +90,92 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:src="@drawable/temper"
                 android:id="@+id/temper"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                 />
+                android:src="@drawable/temper" />
 
             <ImageView
-                android:src="@drawable/fishbowl"
                 android:id="@+id/fishbowl"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                 />
+                android:src="@drawable/fishbowl" />
 
             <ImageView
-                android:src="@drawable/light"
                 android:id="@+id/light"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                 />
+                android:src="@drawable/light" />
 
             <ImageView
-                android:src="@drawable/ph"
                 android:id="@+id/ph"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                 />
+                android:src="@drawable/ph" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="horizontal"></LinearLayout>
-
-        <LinearLayout android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
 
             >
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
 
 
-                android:background="#000000"/>
+                android:background="#000000" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_weight="1"
 
                 android:orientation="horizontal">
+
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
 
-                    android:background="#000000"/>
+                    android:background="#000000" />
 
                 <TextView
+                    android:id="@+id/btn_TimeText"
                     android:layout_width="0px"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="시간"
-                    android:textStyle="bold"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:text="시간"
+                    android:textStyle="bold">
 
                 </TextView>
+
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:background="#000000"/>
+                    android:background="#000000" />
+
                 <TextView
                     android:id="@+id/textTemper"
                     android:layout_width="0px"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="수온" />
+                    android:text="수온"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:background="#000000"/>
+                    android:background="#000000" />
 
 
                 <TextView
@@ -188,52 +183,65 @@
                     android:layout_width="0px"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textStyle="bold"
                     android:gravity="center"
-                    android:text="PH농도" />
+                    android:text="PH농도"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:background="#000000"/>
+                    android:background="#000000" />
+
                 <TextView
                     android:id="@+id/textLight"
                     android:layout_width="0px"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textStyle="bold"
                     android:gravity="center"
-                    android:text="조도량" />
+                    android:text="조도량"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:background="#000000"/>
+                    android:background="#000000" />
+
                 <TextView
                     android:id="@+id/textFishbowl"
                     android:layout_width="0px"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textStyle="bold"
                     android:gravity="center"
-                    android:text="수위" />
+                    android:text="수위"
+                    android:textStyle="bold" />
+
                 <View
                     android:layout_width="2dp"
                     android:layout_height="match_parent"
-                    android:background="#000000"/>
+                    android:background="#000000" />
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
 
 
-                android:background="#000000"/>
+                android:background="#000000" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerviewList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/holo_blue_dark" />
+            </FrameLayout>
 
 
         </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerviewList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/holo_blue_dark" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,6 +21,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +35,19 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     private FragmentManager fragmentManager;
     private test test;
     private FragmentTransaction transaction;
+    static List<UserInfo1> alldataList;
 
+    //타이머 코드
+    private Timer timerCall;
+    private int nCnt;
+
+    static public List<UserInfo1> getAlldataList() {
+        return alldataList;
+    }
+
+    public void setAlldataList(List<UserInfo1> alldataList) {
+        this.alldataList = alldataList;
+    }
 
 
     // 어답터
@@ -65,24 +81,46 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         Retrofit_interface service = retrofit_client.getRetrofitInstance().create(Retrofit_interface.class);
         Call<List<UserInfo1>> call = service.getAllPhotos();
         //통신완료후 이벤트 처리를 위한 콜백 리스너 등록
-        call.enqueue(new Callback<List<UserInfo1>>() {
-            // 정상으로 통신 성공시
+
+
+
+
+
+
+        nCnt = 0;
+
+        TimerTask timerTask = new TimerTask() {
             @Override
-            public void onResponse(Call<List<UserInfo1>> call, Response<List<UserInfo1>> response) {
-                progressDoalog.dismiss();
-                generateDataList(response.body());
-            }
-            // 통신 실패시(예외발생, 인터넷끊김 등의 이유)
-            @Override
-            public void onFailure(Call<List<UserInfo1>> call, Throwable t) {
-                progressDoalog.dismiss();
-                System.out.println(t);
-                Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            public void run() {
+//                someWork();//타이머 켄슬
+
+                call.clone().enqueue(new Callback<List<UserInfo1>>() {
+                    // 정상으로 통신 성공시
+                    @Override
+                    public void onResponse(Call<List<UserInfo1>> call, Response<List<UserInfo1>> response) {
+                        progressDoalog.dismiss();
+                        setAlldataList(response.body());
+                        generateDataList(response.body());
+                        Log.e("aa","taaaaaaaaaaaaa");
+                    }
+                    // 통신 실패시(예외발생, 인터넷끊김 등의 이유)
+                    @Override
+                    public void onFailure(Call<List<UserInfo1>> call, Throwable t) {
+                        progressDoalog.dismiss();
+                        System.out.println(t);
+                        Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                        Log.e("aa","testtest");
+                    }
+                });
+
 
             }
-        });
+        };
 
-
+        timerCall = new Timer();
+        //몇초 후 실행 delay
+        //period 주기마다
+        timerCall.schedule(timerTask,0,10*1000);
 
 
 
@@ -99,10 +137,37 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         findViewById(R.id.fishbowlStatus).setOnClickListener(this);
         findViewById(R.id.lightStatus).setOnClickListener(this);
         findViewById(R.id.PHStatus).setOnClickListener(this);
+
+        findViewById(R.id.btn_TimeText).setOnClickListener(this);
         }
 
     }
 
+    private void someWork() {
+
+        Log.d("Test==>", nCnt + " work!!!");
+        if(nCnt >= 10) {
+            timerCall.cancel();
+        }
+
+        nCnt++;
+    }
+
+    //달력
+    public void showDatePicker(View view) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(),"datePicker");
+
+    }
+
+    public void processDatePickerResult(int year, int month, int day){
+        String month_string = Integer.toString(month+1);
+        String day_string = Integer.toString(day);
+        String year_string = Integer.toString(year);
+        String dateMessage = (month_string + "/" + day_string + "/" + year_string);
+    //aaaaaaaaaaaaaaa
+        Toast.makeText(this,"Date: a"+dateMessage,Toast.LENGTH_SHORT).show();
+    }
 
     // 리사이클러뷰
     private void generateDataList(List<UserInfo1> photoList) {
@@ -120,7 +185,6 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
             case R.id.temper:
                 mOnPopupClick(view,PopupActivity.class,"temper");
                 break;
-
             case R.id.fishbowl:
                 mOnPopupClick(view,PopupActivity.class,"fishbowl");
                 break;
@@ -144,6 +208,10 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
                 mOnPopupClick(view,LogPopupActivity.class,"PHStatus");
                 break;
 
+            case R.id.btn_TimeText:
+                Toast.makeText(MainActivity.this, "가능???", Toast.LENGTH_SHORT).show();
+                showDatePicker(view);
+                break;
         }
     }
 
@@ -156,6 +224,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         Intent intent = new Intent(this, context);
 //        intent.putExtra("data", "Test Popup");
         intent.putExtra("name", name);
+
         startActivity(intent);
 
 

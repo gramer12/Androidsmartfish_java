@@ -16,12 +16,13 @@ import java.util.List;
 
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.Holder> {
 
-    private List<UserInfo> dataList;
+    private List<UserInfo1> dataList;
     private Context context;
-
-    public UserListAdapter( Context context,List<UserInfo> dataList) {
+    private String sensorName;
+    public UserListAdapter( Context context,List<UserInfo1> dataList,String sensorname ) {
         this.dataList = dataList;
         this.context = context;
+        this.sensorName = sensorname;
 
     }
     @Override
@@ -59,12 +60,24 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.Holder
     }
     @Override
     public void onBindViewHolder(@NonNull UserListAdapter.Holder holder, int position) {
-        UserInfo item = dataList.get(position);
+        UserInfo1 item = dataList.get(position);
 
         holder.date.setText(item.getDate());
         holder.time.setText(item.getTime());
-        holder.data.setText(item.getData());
-
+        switch (sensorName){
+            case "temper":
+                holder.data.setText(item.getTemper());
+                break;
+            case "fishbowl":
+                holder.data.setText(item.getFishbowl());
+                break;
+            case "light":
+                holder.data.setText(item.getLight());
+                break;
+            case "ph":
+                holder.data.setText(item.getPh());
+                break;
+        }
 
 
     }
