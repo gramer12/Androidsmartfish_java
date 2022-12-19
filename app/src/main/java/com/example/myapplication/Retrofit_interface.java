@@ -10,6 +10,7 @@ public interface Retrofit_interface {
     //    @GET("posts/{UserID}")
 //    Call<data_model> test_api_get(
 //            @Path("UserID") String userid);
+    //deviceAPI/deviceGet
     @GET("deviceAPI/deviceGet")
             Call<List<UserInfo1>> getAllPhotos();
 

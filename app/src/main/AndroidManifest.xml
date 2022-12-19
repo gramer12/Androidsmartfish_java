@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".PopupActivity" android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".LogPopupActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".TimePopup" android:theme="@android:style/Theme.Dialog" />
+
         <activity android:name=".test"/>
         <activity android:name=".apitest"/>
 
