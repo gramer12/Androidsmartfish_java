@@ -8,26 +8,22 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.example.myapplication.Adapter_Folder.DataListAdapter;
+import com.example.myapplication.Data_Folder.AlldataList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.util.List;
 
 public class PopupActivity extends Activity {
 android.widget.ImageView ImageView;
 
 
     // 어답터
-    private UserListAdapter adapter;
+    private DataListAdapter adapter;
     // 리사이클러뷰
     private RecyclerView recyclerView;
     String sensorName;
@@ -76,10 +72,10 @@ android.widget.ImageView ImageView;
         finish();
     }
     // 리사이클러뷰
-    private void generateDataList(List<UserInfo1> photoList) {
+    private void generateDataList(List<AlldataList> photoList) {
         try {
             recyclerView = findViewById(R.id.popupRecyclerview);
-            adapter = new UserListAdapter(this, photoList,sensorName);
+            adapter = new DataListAdapter(this, photoList,sensorName);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(PopupActivity.this);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);

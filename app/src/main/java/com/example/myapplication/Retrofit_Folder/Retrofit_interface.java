@@ -1,4 +1,7 @@
-package com.example.myapplication;
+package com.example.myapplication.Retrofit_Folder;
+
+import com.example.myapplication.Data_Folder.AlldataList;
+import com.example.myapplication.Data_Folder.DataList;
 
 import java.util.List;
 
@@ -12,9 +15,9 @@ public interface Retrofit_interface {
 //            @Path("UserID") String userid);
     //deviceAPI/deviceGet
     @GET("deviceAPI/deviceGet")
-            Call<List<UserInfo1>> getAllPhotos();
+            Call<List<AlldataList>> getAllPhotos();
 
     @GET("api/data/{sensorName}")
-    Call<List<UserInfo>> getSensorData(
+    Call<List<DataList>> getSensorData(
             @Path("sensorName") String sensorName);
 }

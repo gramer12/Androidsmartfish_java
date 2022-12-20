@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Adapter_Folder;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,26 +9,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.Data_Folder.LogList;
+import com.example.myapplication.R;
+
 import java.util.ArrayList;
 
-public class UserListAdapter3 extends RecyclerView.Adapter<UserListAdapter3.Holder> {
+public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.Holder> {
 
-    ArrayList<UserInfo3> items = new ArrayList<>();
+    ArrayList<LogList> items = new ArrayList<>();
 
-    public UserListAdapter3(ArrayList<UserInfo3> items) {
+    public LogListAdapter(ArrayList<LogList> items) {
         this.items = items;
     }
 
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_person3, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_logdata, parent, false);
         return new Holder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        UserInfo3 item = items.get(position);
+        LogList item = items.get(position);
 //        holder.profileImg.setImageDrawable(item.getProfile());
 //        holder.nameAge.setText(item.getName() + "(" + item.getAge() + ")");
         holder.time.setText(item.getTime());
@@ -53,7 +56,7 @@ public class UserListAdapter3 extends RecyclerView.Adapter<UserListAdapter3.Hold
             super(itemView);
             time = itemView.findViewById(R.id.textTime);
             logData = itemView.findViewById(R.id.textLogData);
-            btn_delete= itemView.findViewById(R.id.btn_delete);
+
         }
     }
 }

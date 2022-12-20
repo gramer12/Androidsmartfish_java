@@ -1,10 +1,10 @@
-package com.example.myapplication;
+package com.example.myapplication.Data_Folder;
 
-public class UserInfo3 {
+public class LogList {
    private String time;
    private  String logData;
 
-    public UserInfo3(String time, String logData) {
+    public LogList(String time, String logData) {
         this.time = time;
         this.logData = logData;
     }

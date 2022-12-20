@@ -9,15 +9,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.myapplication.Adapter_Folder.AllDataListAdapter;
+import com.example.myapplication.Data_Folder.AlldataList;
+import com.example.myapplication.Fragment.BarChart;
+import com.example.myapplication.Fragment.DatePickerFragment;
+import com.example.myapplication.Retrofit_Folder.Retrofit_interface;
+import com.example.myapplication.Retrofit_Folder.retrofit_client;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //차트 프래그먼트
     private FragmentManager fragmentManager;
-    private test test;
+    private com.example.myapplication.Fragment.BarChart BarChart;
     private FragmentTransaction transaction;
-    static List<UserInfo1> alldataList;
+    static List<AlldataList> alldataList;
 
-    static List<UserInfo1> selectDataList=new ArrayList<>();
+    static List<AlldataList> selectDataList=new ArrayList<>();
 
-    public static List<UserInfo1> getSelectDataList() {
+    public static List<AlldataList> getSelectDataList() {
         return selectDataList;
     }
 
@@ -47,11 +51,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Timer timerCall;
     private int nCnt;
 
-    static public List<UserInfo1> getAlldataList() {
+    static public List<AlldataList> getAlldataList() {
         return alldataList;
     }
 
-    public void setAlldataList(List<UserInfo1> alldataList) {
+    public void setAlldataList(List<AlldataList> alldataList) {
         this.alldataList = alldataList;
     }
 
@@ -60,24 +64,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String dateMessage;
 
     // 어답터
-    private UserListAdapter1 adapter;
+    private AllDataListAdapter adapter;
     // 리사이클러뷰
     private RecyclerView recyclerView;
     // 진행바
     ProgressDialog progressDoalog;
 
     TimerTask timerTask;
+
+
+    private TextView timeTextView;
+    private Boolean isBlack;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
-        new test();
+        new BarChart();
         fragmentManager = getSupportFragmentManager();
-        test = new test();
+        BarChart = new BarChart();
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.bar_chart_frameLayout, test).commitAllowingStateLoss();
+        transaction.replace(R.id.bar_chart_frameLayout, BarChart).commitAllowingStateLoss();
 
 
         progressDoalog = new ProgressDialog(MainActivity.this);
@@ -88,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 레트로핏 인스턴스 생성을 해줍니다.
         // enqueue로 비동기 통신을 싱행합니다.
         Retrofit_interface service = retrofit_client.getRetrofitInstance().create(Retrofit_interface.class);
-        Call<List<UserInfo1>> call = service.getAllPhotos();
+        Call<List<AlldataList>> call = service.getAllPhotos();
         //통신완료후 이벤트 처리를 위한 콜백 리스너 등록
 
 
@@ -99,10 +109,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void run() {
 //                someWork();//타이머 켄슬
 
-                call.clone().enqueue(new Callback<List<UserInfo1>>() {
+                call.clone().enqueue(new Callback<List<AlldataList>>() {
                     // 정상으로 통신 성공시
                     @Override
-                    public void onResponse(Call<List<UserInfo1>> call, Response<List<UserInfo1>> response) {
+                    public void onResponse(Call<List<AlldataList>> call, Response<List<AlldataList>> response) {
                         progressDoalog.dismiss();
                         setAlldataList(response.body());
 
@@ -115,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     // 통신 실패시(예외발생, 인터넷끊김 등의 이유)
                     @Override
-                    public void onFailure(Call<List<UserInfo1>> call, Throwable t) {
+                    public void onFailure(Call<List<AlldataList>> call, Throwable t) {
                         progressDoalog.dismiss();
                         System.out.println(t);
                         Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
@@ -130,6 +140,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //몇초 후 실행 delay
         //period 주기마다
         timerCall.schedule(timerTask, 0, 10 * 1000);
+
+
+        isBlack = true;
 
 
 
@@ -197,9 +210,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     // 리사이클러뷰
-    private void generateDataList(List<UserInfo1> photoList) {
+    private void generateDataList(List<AlldataList> photoList) {
         recyclerView = findViewById(R.id.recyclerviewList);
-        adapter = new UserListAdapter1(this, photoList);
+        adapter = new AllDataListAdapter(this, photoList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -237,9 +250,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn_TimeText:
                 mOnPopupClick(view, TimePopup.class, "");
-                Intent intent = getIntent();
-                String okdata = intent.getStringExtra("okdata");
-
 
 
 

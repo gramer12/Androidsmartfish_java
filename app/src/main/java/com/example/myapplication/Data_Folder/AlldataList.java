@@ -1,10 +1,8 @@
-package com.example.myapplication;
-
-import android.graphics.drawable.Drawable;
+package com.example.myapplication.Data_Folder;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UserInfo1 {
+public class AlldataList {
     @SerializedName("date")
     private String date;
     @SerializedName("time")
@@ -18,7 +16,7 @@ public class UserInfo1 {
     @SerializedName("Fishbowl")
     private String Fishbowl;
 
-    public UserInfo1(String date, String time, String temper, String ph, String light, String fishbowl) {
+    public AlldataList(String date, String time, String temper, String ph, String light, String fishbowl) {
         this.date = date;
         this.time = time;
         this.temper = temper;

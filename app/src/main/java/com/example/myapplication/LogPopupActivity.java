@@ -11,9 +11,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONObject;
+import com.example.myapplication.Adapter_Folder.LogListAdapter;
+import com.example.myapplication.Data_Folder.LogList;
 
-import java.text.BreakIterator;
 import java.util.ArrayList;
 
 public class LogPopupActivity extends Activity {
@@ -22,8 +22,8 @@ android.widget.ImageView ImageView;
     //리싸이클러뷰
     RecyclerView userList;
     LinearLayoutManager linearLayoutManager;
-    UserListAdapter3 adapter;
-    ArrayList<UserInfo3> items = new ArrayList<>();
+    LogListAdapter adapter;
+    ArrayList<LogList> items = new ArrayList<>();
 
 
     @Override
@@ -31,7 +31,7 @@ android.widget.ImageView ImageView;
         super.onCreate(savedInstanceState);
         //타이틀바 없애기
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.log_popup_activity);
+        setContentView(R.layout.popup_log_activity);
 
         //UI 객체생성
 //        txtText = (TextView)findViewById(R.id.txtText);
@@ -46,31 +46,31 @@ android.widget.ImageView ImageView;
 //리사이클러뷰
         userList = findViewById(R.id.logRecyclerview);
         linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        adapter = new UserListAdapter3(items);
+        adapter = new LogListAdapter(items);
         userList.setLayoutManager(linearLayoutManager);
         userList.setAdapter(adapter);
 
         {
-            items.add(new UserInfo3(
+            items.add(new LogList(
                     "12.09",
                     "dsadsadasdasdasdasdasdaddadssad"
             ));
-            items.add(new UserInfo3(
+            items.add(new LogList(
                     "12.09",
                     "dsadsadasdasdasdasdasdaddadssad"
-            ));items.add(new UserInfo3(
+            ));items.add(new LogList(
                 "12.09",
                 "dsadsadasdasdasdasdasdaddadssad"
-        ));items.add(new UserInfo3(
+        ));items.add(new LogList(
                 "12.09",
                 "dsadsadasdasdasdasdasdaddadssad"
-        ));items.add(new UserInfo3(
+        ));items.add(new LogList(
                 "12.09",
                 "dsadsadasdasdasdasdasdaddadssad"
-        ));items.add(new UserInfo3(
+        ));items.add(new LogList(
                 "12.09",
                 "dsadsadasdasdasdasdasdaddadssad"
-        ));items.add(new UserInfo3(
+        ));items.add(new LogList(
                 "12.09",
                 "dsadsadasdasdasdasdasdaddadssad"
         ));

@@ -1,25 +1,26 @@
-package com.example.myapplication;
+package com.example.myapplication.Adapter_Folder;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.myapplication.Data_Folder.AlldataList;
+import com.example.myapplication.R;
+
 import java.util.List;
 
-public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.Holder> {
+public class DataListAdapter extends RecyclerView.Adapter<DataListAdapter.Holder> {
 
-    private List<UserInfo1> dataList;
+    private List<AlldataList> dataList;
     private Context context;
     private String sensorName;
-    public UserListAdapter( Context context,List<UserInfo1> dataList,String sensorname ) {
+    public DataListAdapter(Context context, List<AlldataList> dataList, String sensorname ) {
         this.dataList = dataList;
         this.context = context;
         this.sensorName = sensorname;
@@ -54,13 +55,13 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.Holder
 
     @NonNull
     @Override
-    public UserListAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_person, parent, false);
-        return new UserListAdapter.Holder(v);
+    public DataListAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_datalist, parent, false);
+        return new DataListAdapter.Holder(v);
     }
     @Override
-    public void onBindViewHolder(@NonNull UserListAdapter.Holder holder, int position) {
-        UserInfo1 item = dataList.get(position);
+    public void onBindViewHolder(@NonNull DataListAdapter.Holder holder, int position) {
+        AlldataList item = dataList.get(position);
 
         holder.date.setText(item.getDate());
         holder.time.setText(item.getTime());

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Retrofit_Folder;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

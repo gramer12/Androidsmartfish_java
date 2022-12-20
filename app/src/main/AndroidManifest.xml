@@ -35,8 +35,7 @@
         <activity android:name=".LogPopupActivity" android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".TimePopup" android:theme="@android:style/Theme.Dialog" />
 
-        <activity android:name=".test"/>
-        <activity android:name=".apitest"/>
+        <activity android:name=".Fragment.BarChart"/>
 
     </application>
 

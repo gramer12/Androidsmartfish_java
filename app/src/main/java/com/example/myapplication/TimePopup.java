@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.Adapter_Folder.LogListAdapter;
+import com.example.myapplication.Data_Folder.LogList;
 
 import java.util.ArrayList;
 
@@ -20,8 +21,8 @@ public class TimePopup extends Activity {
     //리싸이클러뷰
     RecyclerView userList;
     LinearLayoutManager linearLayoutManager;
-    UserListAdapter3 adapter;
-    ArrayList<UserInfo3> items = new ArrayList<>();
+    LogListAdapter adapter;
+    ArrayList<LogList> items = new ArrayList<>();
 
 
     @Override
@@ -29,7 +30,7 @@ public class TimePopup extends Activity {
         super.onCreate(savedInstanceState);
         //타이틀바 없애기
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.time_popup);
+        setContentView(R.layout.popup_time);
 
 
 

@@ -69,6 +69,7 @@
             android:padding="16dp"
             android:text="확인"
             android:textColor="#ff7a00"
+
             android:textSize="15sp" />
     </LinearLayout>
     <!--// 닫기 버튼 -->

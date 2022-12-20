@@ -1,24 +1,25 @@
-package com.example.myapplication;
+package com.example.myapplication.Adapter_Folder;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.myapplication.Data_Folder.AlldataList;
+import com.example.myapplication.R;
+
 import java.util.List;
 
-public class UserListAdapter1 extends RecyclerView.Adapter<UserListAdapter1.Holder> {
+public class AllDataListAdapter extends RecyclerView.Adapter<AllDataListAdapter.Holder> {
 
-    private List<UserInfo1> dataList;
+    private List<AlldataList> dataList;
     private Context context;
 
-    public UserListAdapter1(Context context, List<UserInfo1> dataList) {
+    public AllDataListAdapter(Context context, List<AlldataList> dataList) {
         this.context = context;
         this.dataList = dataList;
     }
@@ -55,12 +56,12 @@ public class UserListAdapter1 extends RecyclerView.Adapter<UserListAdapter1.Hold
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_person1, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_alldata, parent, false);
         return new Holder(v);
     }
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        UserInfo1 item = dataList.get(position);
+        AlldataList item = dataList.get(position);
 
         holder.date.setText(item.getDate());
         holder.time.setText(item.getTime());

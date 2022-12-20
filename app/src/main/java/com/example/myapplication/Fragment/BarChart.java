@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.github.mikephil.charting.charts.BarChart;
+import com.example.myapplication.R;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -22,14 +21,14 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
 import java.util.ArrayList;
 
-public class test  extends Fragment {
+public class BarChart extends Fragment {
 
-    BarChart mChart;
+    com.github.mikephil.charting.charts.BarChart mChart;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.test, container, false);
+        View view =inflater.inflate(R.layout.barchart, container, false);
         GroupBarChart(view);
         return view;
     }
@@ -45,7 +44,7 @@ public class test  extends Fragment {
 
 
     public void GroupBarChart(View view){
-        mChart = (BarChart) view.findViewById(R.id.bar_chart);
+        mChart = (com.github.mikephil.charting.charts.BarChart) view.findViewById(R.id.bar_chart);
         mChart.setDrawBarShadow(false);
         mChart.getDescription().setEnabled(false);
         mChart.setPinchZoom(false);

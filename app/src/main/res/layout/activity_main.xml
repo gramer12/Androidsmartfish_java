@@ -95,6 +95,8 @@
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
+                android:background="?attr/selectableItemBackground"
+
                 android:src="@drawable/temper" />
 
             <ImageView
@@ -102,6 +104,8 @@
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
+                android:background="?attr/selectableItemBackground"
+
                 android:src="@drawable/fishbowl" />
 
             <ImageView
@@ -109,6 +113,8 @@
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
+                android:background="?attr/selectableItemBackground"
+
                 android:src="@drawable/light" />
 
             <ImageView
@@ -116,6 +122,8 @@
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
+                android:background="?attr/selectableItemBackground"
+
                 android:src="@drawable/ph" />
 
         </LinearLayout>
@@ -155,6 +163,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+
 
                     android:textSize="17dp"
                     android:text="시간"

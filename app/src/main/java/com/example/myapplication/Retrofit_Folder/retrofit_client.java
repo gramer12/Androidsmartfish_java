@@ -1,5 +1,6 @@
-package com.example.myapplication;
+package com.example.myapplication.Retrofit_Folder;
 
+import com.example.myapplication.Retrofit_Folder.Retrofit_interface;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
