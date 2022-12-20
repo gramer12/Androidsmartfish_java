@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:background="#C0DEFF"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -20,9 +21,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <FrameLayout
+            android:id="@+id/bar_chart_frameLayout"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:id="@+id/bar_chart_frameLayout"
 
             >
 
@@ -136,6 +137,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:background="#FFE5F1"
 
                 android:orientation="horizontal">
 
@@ -153,7 +155,10 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical"
+
+                    android:textSize="17dp"
                     android:text="시간"
+                    android:textColor="#010101"
                     android:textStyle="bold">
 
                 </TextView>
@@ -170,6 +175,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="수온"
+                    android:textColor="#010101"
+                    android:textSize="17dp"
+
                     android:textStyle="bold" />
 
                 <View
@@ -185,6 +193,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="PH농도"
+                    android:textColor="#010101"
+                    android:textSize="17dp"
+
                     android:textStyle="bold" />
 
                 <View
@@ -199,6 +210,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="조도량"
+                    android:textColor="#010101"
+                    android:textSize="17dp"
+
                     android:textStyle="bold" />
 
                 <View
@@ -213,6 +227,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="수위"
+                    android:textColor="#010101"                    android:textSize="17dp"
+
                     android:textStyle="bold" />
 
                 <View
@@ -236,7 +252,7 @@
                     android:id="@+id/recyclerviewList"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@android:color/holo_blue_dark" />
+                    android:background="#FFF8E1" />
             </FrameLayout>
 
 
