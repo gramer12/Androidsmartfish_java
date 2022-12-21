@@ -24,6 +24,7 @@ import com.example.myapplication.Retrofit_Folder.Retrofit_interface;
 import com.example.myapplication.Retrofit_Folder.retrofit_client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -76,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView timeTextView;
     private Boolean isBlack;
 
+    static public String[] labels= {"", "시간", "시간2", "시간3", "시간4", "Name5", ""};
+
+    static public float[] valOne = {10, 20, 30, 40, 50};
+    static public float[] valTwo = {60, 50, 40, 30, 20};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +89,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
 
-        new BarChart();
-        fragmentManager = getSupportFragmentManager();
-        BarChart = new BarChart();
-        transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.bar_chart_frameLayout, BarChart).commitAllowingStateLoss();
+//        new BarChart();
+//        fragmentManager = getSupportFragmentManager();
+//        BarChart = new BarChart();
+//        transaction = fragmentManager.beginTransaction();
+//        transaction.replace(R.id.bar_chart_frameLayout, BarChart).commitAllowingStateLoss();
 
 
         progressDoalog = new ProgressDialog(MainActivity.this);
@@ -120,6 +126,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             selectDataList=alldataList;
                         nCnt++;
                         generateDataList(selectDataList);
+
+                        barChartRe(selectDataList);
 
                     }
 
@@ -204,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
                     generateDataList(selectDataList);
+                    barChartRe(selectDataList);
         } catch (Exception e) {
             Log.e("dd", e + "");
         }
@@ -218,6 +227,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setAdapter(adapter);
     }
 
+    // 리사이클러뷰
+    private void barChartRe(List<AlldataList> selectDataList) {
+        String[] arr = {""};
+        float[] val1={};
+        float[] val2={};
+
+
+        int arrSize=Math.min(selectDataList.size(),5);
+
+        for(int i=0;i<=arrSize;i++){
+            String[] newArr = Arrays.copyOf(arr, arr.length + 1);
+//             newVal1={};
+//            float[] newVal2={};
+
+            float[] newVal1 = Arrays.copyOf(val1, arr.length + 1);
+            float[] newVal2 = Arrays.copyOf(val2, arr.length + 1);
+
+
+            if(arrSize==i){
+                newArr[arr.length + 0] = "";
+            }else{
+                newArr[arr.length + 0] = selectDataList.get(i).getTime();
+                newVal1[arr.length + 0] = Float.parseFloat(selectDataList.get(i).getTemper());
+                newVal2[arr.length + 0] = Float.parseFloat(selectDataList.get(i).getPh());
+            }
+
+            arr=newArr;
+            val1=newVal1;
+            val2=newVal2;
+        }
+//        float[] valOne = {10, 20, 30, 40, 50};
+//        float[] valTwo = {60, 50, 40, 30, 20};
+//        float[] valThree = {50, 60, 20, 10, 30};
+
+       
+            System.arraycopy(val1, 1, val1, 0, arrSize);
+            System.arraycopy(val2, 1, val2, 0, arrSize);
+
+            
+
+
+
+
+        //재셋팅
+        labels= arr;
+        valOne=val1;
+        valTwo=val2;
+
+        new BarChart();
+        fragmentManager = getSupportFragmentManager();
+        BarChart = new BarChart();
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.bar_chart_frameLayout, BarChart).commitAllowingStateLoss();
+
+    }
 
     @Override
     public void onClick(View view) {
