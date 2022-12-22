@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -129,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         barChartRe(selectDataList);
 
+                        statusUpdate();
+
                     }
 
                     // 통신 실패시(예외발생, 인터넷끊김 등의 이유)
@@ -182,6 +185,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private  void statusUpdate(){
+
+        ImageView temperstatus = (ImageView)findViewById(R.id.temperstatus);
+        ImageView fishbowlStatus = (ImageView)findViewById(R.id.fishbowlStatus);
+        ImageView lightStatus = (ImageView)findViewById(R.id.lightStatus);
+        ImageView PHStatus = (ImageView)findViewById(R.id.PHStatus);
+
+        double temper=Double.parseDouble(alldataList.get(0).getTemper());
+        double fishbowl=Double.parseDouble(alldataList.get(0).getFishbowl());
+        double ph=Double.parseDouble(alldataList.get(0).getPh());
+        double light=Double.parseDouble(alldataList.get(0).getLight());
+
+
+
+        if(temper>50||temper<-30){
+            temperstatus.setImageResource(R.drawable.yellow);
+        }else if(temper<23||temper>21){
+            temperstatus.setImageResource(R.drawable.red);
+        }else{
+            temperstatus.setImageResource(R.drawable.green);
+        }
+
+        if(fishbowl>1000||fishbowl<0){
+            fishbowlStatus.setImageResource(R.drawable.yellow);
+        }else if(fishbowl<200||fishbowl>800){
+            fishbowlStatus.setImageResource(R.drawable.red);
+        }else{
+            fishbowlStatus.setImageResource(R.drawable.green);
+        }
+
+        if(ph>10||ph<0){
+            lightStatus.setImageResource(R.drawable.yellow);
+        }else if(ph<3||ph>6){
+            lightStatus.setImageResource(R.drawable.red);
+        }else{
+            lightStatus.setImageResource(R.drawable.green);
+        }
+
+        if(light>100||light<0){
+            PHStatus.setImageResource(R.drawable.yellow);
+        }else if(light<30||light>70){
+            PHStatus.setImageResource(R.drawable.red);
+        }else{
+            PHStatus.setImageResource(R.drawable.green);
+        }
+
+
+    }
 
 
     //달력
